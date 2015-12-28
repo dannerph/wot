@@ -31,8 +31,12 @@ function check_wifi(pin)
             ip = wifi.sta.getip()
         end
     end
-    if (not (ip == oldip)) and (not (ip == nil)) then
-        print ("IP: ".. ip)
+    if not (ip == oldip) then
+        if ip == nil then
+            print("No connection")
+        else
+            print ("IP: ".. ip)
+        end
         oldip = ip
     end
 end
