@@ -4,13 +4,6 @@ function wifi_connect(pin)
         wifi.setmode(wifi.STATION)
         wifi.sta.config("TermoThingy","termothingy1234")
         ip = wifi.sta.getip()
-        retry = 0
-        while ip == nil and retry < 10 do
-            tmr.delay(500000)
-            ip = wifi.sta.getip()
-            print("...")
-            retry = retry + 1
-        end
         print(ip)
     else
         print("Starting as station")
@@ -20,10 +13,6 @@ function wifi_connect(pin)
         cfg.pwd="termothingy1234"
         wifi.ap.config(cfg)
         ip = wifi.ap.getip()
-            while ip == nil do
-                tmr.delay(50000)
-                ip = wifi.ap.getip()
-            end
         print(ip)
     end
 end
@@ -34,14 +23,17 @@ function check_wifi(pin)
             print("Lost jumper")
             wifi_connect(pin)
         end
+        ip = wifi.ap.getip()
     else
         if not check_jumper(pin) then
             print("Jumper added")
             wifi_connect(pin)
-        elseif wifi.sta.getip() == nil then
-            print("Lost connection...reconnect")
-            wifi_connect(pin)
         end
+        ip = wifi.sta.getip()
+    end
+    if not ip == oldip then
+        print(ip)
+        oldip = ip
     end
 end
 
