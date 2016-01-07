@@ -51,3 +51,13 @@ function check_jumper(pin)
     v = gpio.read(pin)
     return v == gpio.HIGH
 end
+
+function getIP()
+    ip = "error"
+    if(wifi.getmode() == wifi.SOFTAP) then
+        ip = wifi.ap.getip()
+    else
+        ip = wifi.sta.getip()
+    end
+    return ip
+end

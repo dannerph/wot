@@ -44,3 +44,35 @@ end
 function myCondition(con)
     return (con == "On" and alarmIsOn) or (con == "Off" and not (alarmIsOn))
 end
+
+--thing description
+cs:func(coap.GET, "td")
+
+function td()
+    ip = getIP()
+    
+    td = "{\n"..
+"  \"@context\": \"http://w3c.github.io/wot/w3c-wot-td-context.jsonld\",\n"..
+"  \"metadata\": {\n"..
+"    \"name\": \"AlarmThingy\",\n"..
+"    \"protocols\" : {\n"..
+"      \"CoAP\" : {\n"..
+"        \"uri\" : \"coap://]]..ip..[[:]]..coapPort..[[\",\n"..
+"        \"priority\" : 1\n"..
+"          }\n"..
+"      },\n"..
+"    \"encodings\": \[\n"..
+"      \"JSON\"\n"..
+"    \]\n"..
+"  },\n"..
+"  \"interactions\": \[\n"..
+"    {\n"..
+"      \"@type\": \"Property\",\n"..
+"      \"name\": \"colorTemperature\",\n"..
+"      \"outputData\": \"xsd:unsignedShort\",\n"..
+"      \"writable\": true\n"..
+"    }\n"..
+"  \]\n"..
+"}"
+    return td
+end

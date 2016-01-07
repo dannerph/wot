@@ -24,7 +24,5 @@ else
     print("no valid thing type")
 end
 
---coap_register()
-
---start the commander
+--load commander
 dofile("commander.lua")
