@@ -1,3 +1,5 @@
+--wifi.lua
+
 function wifi_connect(pin)
     if check_jumper(pin) then
         print("Starting as client")
@@ -10,6 +12,7 @@ function wifi_connect(pin)
         cfg={}
         cfg.ssid="TermoThingy"
         cfg.pwd="termothingy1234"
+        cfg.channel=11
         wifi.ap.config(cfg)
         ip = wifi.ap.getip()
     end

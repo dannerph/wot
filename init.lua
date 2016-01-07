@@ -1,3 +1,5 @@
+--init.lua
+
 --start wifi initiator
 dofile("wifi.lua")
 tmr.stop(0)
@@ -9,8 +11,17 @@ end)
 coapPort = 5683
 cs=nil
 dofile("coap.lua")
-coap_init()
 
---TODO: change to right file
---dofile("td_alarm.lua")
-coap_register()
+--Load specific thing file
+dofile("config.lua")
+if (thingType == "alarm") then
+    dofile("coap_alarm.lua")
+elseif (thingType == "temp") then
+    pdofile("coap_temp.lua")
+elseif (thingType == "heater") then
+   dofile("coap_heater.lua")
+else
+    print("no valid thing type")
+end
+
+--coap_register()
