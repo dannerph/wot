@@ -1,6 +1,4 @@
 --coap_temp.lua
-cs=coap.Server()
-cs:listen(5683)
 cs:var(coap.GET, "temp", 0, 1)
 tmr.alarm(0, 1000, 1, function()
     currentTemp = getTemp(3)
