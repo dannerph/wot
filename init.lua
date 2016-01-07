@@ -25,3 +25,6 @@ else
 end
 
 --coap_register()
+
+--start the commander
+dofile("commander.lua")
