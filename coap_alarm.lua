@@ -4,19 +4,28 @@ gpio.mode(speakerPin,gpio.OUTPUT)
 
 t={}  
 t["a"] = 440
+alarmIsOn = false
 
 cs:func(coap.PUT, "alarmON")
 
 function alarmON()
-    tmr.alarm(4, 1000, 1, function()
-        beep("a", 500)
-    end)
+    if alarmIsOn then
+        
+    else
+        alarmIsOn = true
+        tmr.alarm(4, 1000, 1, function()
+           beep("a", 500)
+        end)
+    end
 end
 
 cs:func(coap.PUT, "alarmOFF")
 
 function alarmOFF()
-    tmr.stop(4)
+    if alarmIsOn then
+        tmr.stop(4)
+        alarmIsOn = false
+    end
 end
 
 function beep(tone, duration)
@@ -31,3 +40,7 @@ function beep(tone, duration)
     tmr.wdclr()  
     tmr.delay(20000)  
 end  
+
+function myCondition(con)
+    return tostring(alarmIsOn) == con
+end
