@@ -2,13 +2,13 @@
 
 gpio.mode(0,gpio.OUTPUT)
 
-cs:func(coap.PUT, "heaterStart")
-cs:func(coap.PUT, "heaterStop")
+cs:func(coap.PUT, "heaterON")
+cs:func(coap.PUT, "heaterOFF")
 
-function heaterStart()
+function heaterON()
         gpio.write(0, gpio.HIGH)
     end
 
-function heaterStop()
+function heaterOFF()
     gpio.write(0,gpio.LOW)
     end
