@@ -42,5 +42,5 @@ function beep(tone, duration)
 end  
 
 function myCondition(con)
-    return tostring(alarmIsOn) == con
+    return (con == "On" and alarmIsOn) or (con == "Off" and not (alarmIsOn))
 end
