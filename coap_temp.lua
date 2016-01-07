@@ -8,3 +8,15 @@ tmr.alarm(0, 1000, 1, function()
         print("changed")
     end
 end)
+
+function myCondition(cond)
+    comperator = string.sub(cond, 1, 1)
+    value = tonumber(string.sub(cond, 2))
+    if (comperator == "<") then
+        return getTemp(3) / 10000 < value
+    end
+    if (comperator == ">") then
+        return getTemp(3) / 10000 > value
+    end
+    return false
+end
