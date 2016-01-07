@@ -1,29 +1,28 @@
 --coap_alarm.lua
-  
+speakerPin = 3
 gpio.mode(speakerPin,gpio.OUTPUT)
 
 t={}  
 t["a"] = 440
 
-cs:func(coap.PUT, "alarmStart")
+cs:func(coap.PUT, "alarmON")
 
-function alarmStart()
+function alarmON()
     tmr.alarm(4, 1000, 1, function()
         beep("a", 500)
     end)
 end
 
-cs:func(coap.PUT, "alarmStop")
+cs:func(coap.PUT, "alarmOFF")
 
-function alarmStop()
+function alarmOFF()
     tmr.stop(4)
 end
 
 function beep(tone, duration)
-    local pin = 3
+    local pin = speakerPin
     local freq = t[tone]  
-    print ("Frequency:" .. freq)  
-    pwm.setup(pin, freq, 512)  
+    pwm.setup(pin, freq, 512)
     pwm.start(pin)  
     -- delay in uSeconds  
     tmr.delay(duration * 1000)  

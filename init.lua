@@ -17,9 +17,9 @@ dofile("config.lua")
 if (thingType == "alarm") then
     dofile("coap_alarm.lua")
 elseif (thingType == "temp") then
-    pdofile("coap_temp.lua")
+    dofile("coap_temp.lua")
 elseif (thingType == "heater") then
-   dofile("coap_heater.lua")
+    dofile("coap_heater.lua")
 else
     print("no valid thing type")
 end
