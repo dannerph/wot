@@ -59,5 +59,8 @@ function getIP()
     else
         ip = wifi.sta.getip()
     end
+    if ip == nil then
+        ip = "error"
+    end
     return ip
 end

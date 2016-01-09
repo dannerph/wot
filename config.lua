@@ -1,7 +1,13 @@
 --config.lua
+-- general configuration
+wifiJumperPin = 4
 
-thingType = "alarm"
-<<<<<<< HEAD
-thingType = "heater"
-=======
->>>>>>> dec2b95c765b69a20cd9ff646a752a87bebd7414
+--thing configuration
+thingType = "alarm" -- "alarm", "temp" or "heater"
+speakerPin = 3 -- with thing type "alarm"
+
+
+-- advanced configuration
+coapPort = 5683
+
+

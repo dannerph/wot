@@ -8,7 +8,7 @@ function addCommand(command)
     table.insert(commands, command)
 end
 
-function printCommands()
+function myCommands()
     result = ""
     for i=1,#commands,1 do
         result = result .. commands[i] .. "\n"
@@ -57,6 +57,6 @@ tmr.alarm(5,1000,1,function()
   doCommands()
 end)
 
-cs:func(coap.PUT, "clearCommands", 0)
-cs:func(coap.PUT, "addCommand", 0)
-cs:func(coap.GET, "printCommands", 0)
+cs:func(coap.POST, "clearCommands", 0)
+cs:func(coap.POST, "addCommand", 0)
+cs:func(coap.GET, "myCommands", 0)
