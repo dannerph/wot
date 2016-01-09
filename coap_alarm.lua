@@ -1,19 +1,28 @@
 --coap_alarm.lua
 gpio.mode(speakerPin,gpio.OUTPUT)
 
-t={}  
-t["a"] = 440
+dofile("notes.lua")
 alarmIsOn = false
+noteIndex = 0
 
 -- POST alarm on route
 cs:func(coap.POST, "alarmON")
 function alarmON()
-    if alarmIsOn then
-        
-    else
+    if not alarmIsOn then
         alarmIsOn = true
         tmr.alarm(4, 1000, 1, function()
-           beep("a", 500)
+            if alarmIsOn then
+                local len = 0
+                while len  <= 1000 do
+                    print(len)
+                    len = len + getNoteLength(noteIndex)
+                    playNote(noteIndex)
+                    noteIndex = noteIndex + 1
+                    if noteIndex == 17 then
+                        noteIndex = 0
+                    end  
+                end
+            end
         end)
     end
 end
@@ -24,6 +33,7 @@ function alarmOFF()
     if alarmIsOn then
         tmr.stop(4)
         alarmIsOn = false
+        noteIndex = 0
     end
 end
 
@@ -91,17 +101,40 @@ td = "{\n"..
 --################--
 -- help functions --
 --################--
-function beep(tone, duration)
-    local pin = speakerPin
-    local freq = t[tone]  
-    pwm.setup(pin, freq, 512)
-    pwm.start(pin)  
-    -- delay in uSeconds  
-    tmr.delay(duration * 1000)  
-    pwm.stop(pin)  
-    --20ms pause  
-    tmr.wdclr()  
-    tmr.delay(20000)  
+function getNoteLength(index)
+    local noteString = n[index]  
+    local i = 0
+    i = string.find(noteString, ",", i)
+    local length = tonumber(string.sub(noteString, i+1))
+    return length
+end
+
+function getNoteFreq(index)
+    local noteString = n[index]  
+    local i = 0
+    i = string.find(noteString, ",", i)
+    local note = tonumber(string.sub(noteString, 0, i-1))
+    return note
+end
+
+function playNote(index)
+    beep(getNoteFreq(index), getNoteLength(index))
+end
+
+function beep(freq, duration)
+    if freq == 0 then
+        tmr.delay(duration * 1000)  
+    else
+        local pin = speakerPin
+        pwm.setup(pin, freq, 512)
+        pwm.start(pin)  
+        -- delay in uSeconds  
+        tmr.delay(duration * 1000)  
+        pwm.stop(pin)  
+        --20ms pause  
+        tmr.wdclr()  
+        tmr.delay(20000)  
+     end
 end  
 
 -- condition to check on command execution
