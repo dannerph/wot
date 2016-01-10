@@ -19,7 +19,7 @@ function alarmON()
                     len = len + getNoteLength(noteIndex)
                     playNote(noteIndex)
                     noteIndex = noteIndex + 1
-                    if noteIndex == 44 then
+                    if noteIndex == 70 then
                         noteIndex = 0
                     end
                 until len  >= 1000
@@ -46,18 +46,6 @@ function status()
     else
         return "Off"
     end
-end
-
---GET thing description
-cs:func(coap.GET, "td")
-function td()
-    file.open("td_alarm.json", "r")
-
-    json = file.read()
-    json = string.gsub(json, "COAP_IP:COAP_PORT", getIP()..":"..coapPort)
-
-    file.close()
-    return json
 end
 
 --################--
