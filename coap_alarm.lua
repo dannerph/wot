@@ -49,55 +49,16 @@ function status()
 end
 
 --GET thing description
-cs:var(coap.GET, "td")
-td = "{\n"..
-"  \"@context\": \"http://w3c.github.io/wot/w3c-wot-td-context.jsonld\",\n"..
-"  \"metadata\": {\n"..
-"    \"name\": \"AlarmThingy\",\n"..
-"    \"protocols\" : {\n"..
-"      \"CoAP\" : {\n"..
-"        \"uri\" : \"coap://"..getIP()..":"..coapPort.."\",\n"..
-"        \"priority\" : 1\n"..
-"          }\n"..
-"      },\n"..
-"    \"encodings\": \[\n"..
-"      \"JSON\"\n"..
-"    \]\n"..
-"  },\n"..
-"  \"interactions\": \[\n"..
-"    {\n"..
-"      \"@type\": \"Property\",\n"..
-"      \"name\": \"status\",\n"..
-"      \"outputData\": \"xsd:string\",\n"..
-"      \"writable\": false\n"..
-"    },{\n"..
-"      \"@type\": \"Action\",\n"..
-"      \"name\": \"alarmON\",\n"..
-"      \"inputData\": \"\",\n"..
-"      \"outputData\": \"\"\n"..
-"    },{\n"..
-"      \"@type\": \"Action\",\n"..
-"      \"name\": \"alarmOFF\",\n"..
-"      \"inputData\": \"\",\n"..
-"      \"outputData\": \"\"\n"..
-"    },{\n"..
-"      \"@type\": \"Property\",\n"..
-"      \"name\": \"myCommands\",\n"..
-"      \"outputData\": \"xsd:string\",\n"..
-"      \"writable\": false\n"..
-"    },{\n"..
-"      \"@type\": \"Action\",\n"..
-"      \"name\": \"clearCommands\",\n"..
-"      \"inputData\": \"\",\n"..
-"      \"outputData\": \"\"\n"..
-"    },{\n"..
-"      \"@type\": \"Action\",\n"..
-"      \"name\": \"addCommand\",\n"..
-"      \"inputData\": \"xsd:string\",\n"..
-"      \"outputData\": \"\"\n"..
-"    }\n"..
-"  \]\n"..
-"}"
+cs:func(coap.GET, "td")
+function td()
+    file.open("td_alarm.json", "r")
+
+    json = file.read()
+    json = string.gsub(json, "COAP_IP:COAP_PORT", getIP()..":"..coapPort)
+
+    file.close()
+    return json
+end
 
 --################--
 -- help functions --
