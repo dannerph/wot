@@ -10,19 +10,20 @@ cs:func(coap.POST, "alarmON")
 function alarmON()
     if not alarmIsOn then
         alarmIsOn = true
-        tmr.alarm(4, 1000, 1, function()
+        tmr.alarm(4, 1100, 1, function()
+            print("timer started")
             if alarmIsOn then
-                local len = 0
-                while len  <= 1000 do
+            local len = 0
+                repeat
                     print(len)
                     len = len + getNoteLength(noteIndex)
                     playNote(noteIndex)
                     noteIndex = noteIndex + 1
-                    if noteIndex == 17 then
+                    if noteIndex == 44 then
                         noteIndex = 0
-                    end  
-                end
-            end
+                    end
+                until len  >= 1000
+            end 
         end)
     end
 end
