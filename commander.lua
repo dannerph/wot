@@ -13,7 +13,7 @@ function myCommands()
     for i=1,#commands,1 do
         result = result .. commands[i] .. "\n"
     end
-    return result
+    return "{\"value\":\""..result.."\"}"
 end
 
 function doCommands()

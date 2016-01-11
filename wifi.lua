@@ -4,7 +4,7 @@ function wifi_connect(pin)
     if check_jumper(pin) then
         print("Starting as client")
         wifi.setmode(wifi.STATION)
-        wifi.sta.config("TermoThingy","termothingy1234")
+        wifi.sta.config("wot","webofthings")
         ip = wifi.sta.getip()
     else
         print("Starting as station")
