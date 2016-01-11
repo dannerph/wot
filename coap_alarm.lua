@@ -52,17 +52,17 @@ function getNoteFreq(index)
 end
 
 function playNote(index)
-    print(index)
-    if getNoteFreq(index) > 0 then
-        local pin = speakerPin
-        pwm.setup(pin, getNoteFreq(index), 512)
-        pwm.start(pin)  
-        -- delay in uSeconds 
-        tmr.alarm(2, getNoteLength(index), 2, function()
-            pwm.stop(pin)
+    local freq = getNoteFreq(index)
+    local duration = getNoteLength(index)
+    
+    if freq > 0 then
+        pwm.setup(speakerPin, freq, 512)
+        pwm.start(speakerPin)  
+        tmr.alarm(2, duration, 2, function()
+            pwm.stop(speakerPin)
         end)
      end
-     tmr.alarm(1, getNoteLength(index) + 20, 2, function()
+     tmr.alarm(1, duration + 20, 2, function()
         playNote((index + 1)%#n)
      end)
 end
