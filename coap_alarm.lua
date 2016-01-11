@@ -35,25 +35,9 @@ end
 --################--
 -- help functions --
 --################--
-function getNoteLength(index)
-    local noteString = n[index]  
-    local i = 0
-    i = string.find(noteString, ",", i)
-    local length = tonumber(string.sub(noteString, i+1))
-    return length
-end
-
-function getNoteFreq(index)
-    local noteString = n[index]  
-    local i = 0
-    i = string.find(noteString, ",", i)
-    local note = tonumber(string.sub(noteString, 0, i-1))
-    return note
-end
-
 function playNote(index)
-    local freq = getNoteFreq(index)
-    local duration = getNoteLength(index)
+    local freq = bit.rshift(n[index],16)
+    local duration = bit.clear(n[index],16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31) 
     
     if freq > 0 then
         pwm.setup(speakerPin, freq, 512)
