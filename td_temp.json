@@ -1,11 +1,11 @@
 {
   "@context": "http://w3c.github.io/wot/w3c-wot-td-context.jsonld",
   "metadata": {
-    "name": "AlarmThingy",
-    "protocols ": {
-      "CoAP ": {
-        "uri ": "coap://COAP_IP:COAP_PORT",
-        "priority ": 1
+    "name": "TemperatureThingy",
+    "protocols": {
+      "CoAP": {
+        "uri": "coap://COAP_IP:COAP_PORT",
+        "priority": 1
           }
       },
     "encodings": [
@@ -15,19 +15,9 @@
   "interactions":[
     {
       "@type": "Property",
-      "name": "status",
+      "name": "temp",
       "outputData": "xsd:string",
       "writable": false
-    },{
-      "@type": "Action",
-      "name": "alarmON",
-      "inputData": "",
-      "outputData": ""
-    },{
-      "@type": "Action",
-      "name": "alarmOFF",
-      "inputData": "",
-      "outputData": ""
     },{
       "@type": "Property",
       "name": "myCommands",
