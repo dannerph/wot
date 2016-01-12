@@ -3,7 +3,7 @@
 wifiJumperPin = 4
 
 --thing configuration
-thingType = "alarm" -- "alarm", "temp" or "heater"
+thingType = "heater" -- "alarm", "temp" or "heater"
 speakerPin = 3 -- with thing type "alarm"
 
 

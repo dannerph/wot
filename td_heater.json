@@ -2,10 +2,10 @@
   "@context": "http://w3c.github.io/wot/w3c-wot-td-context.jsonld",
   "metadata": {
     "name": "AlarmThingy",
-    "protocols ": {
-      "CoAP ": {
-        "uri ": "coap://COAP_IP:COAP_PORT",
-        "priority ": 1
+    "protocols": {
+      "CoAP": {
+        "uri": "coap://COAP_IP:COAP_PORT",
+        "priority": 1
           }
       },
     "encodings": [
@@ -20,12 +20,12 @@
       "writable": false
     },{
       "@type": "Action",
-      "name": "alarmON",
+      "name": "heaterON",
       "inputData": "",
       "outputData": ""
     },{
       "@type": "Action",
-      "name": "alarmOFF",
+      "name": "heaterOFF",
       "inputData": "",
       "outputData": ""
     },{
